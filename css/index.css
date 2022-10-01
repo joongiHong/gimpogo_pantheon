@@ -1,0 +1,39 @@
+@charset "UTF-8";
+.arrow-btn {
+  position: relative;
+  display: inline-block;
+  border-radius: 0;
+  color: white;
+  margin-top: 2rem;
+  font-weight: bold;
+  font-size: 2rem;
+  letter-spacing: 2px;
+  text-decoration: none;
+  transition: 700ms cubic-bezier(0.165, 0.84, 0.44, 1);
+  padding-right: 2.5em;
+}
+.arrow-btn:hover {
+  transition: 400ms cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.arrow-btn:hover:after {
+  transition: 400ms cubic-bezier(0.165, 0.84, 0.44, 1);
+  transform: translateX(15px);
+  opacity: 0;
+}
+.arrow-btn:hover:before {
+  transition: 700ms cubic-bezier(0.165, 0.84, 0.44, 1);
+  transform: translateX(0);
+  opacity: 1;
+}
+.arrow-btn:before, .arrow-btn:after {
+  content: "⟶";
+  position: absolute;
+  right: 0;
+}
+.arrow-btn:before {
+  transform: translateX(-15px);
+  opacity: 0;
+}
+.arrow-btn:after {
+  transform: none;
+}

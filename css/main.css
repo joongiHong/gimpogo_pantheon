@@ -1,0 +1,239 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url('../image/background.png');
+    background-size: cover;
+}
+
+h1 {
+    font-family: 'IBM Plex Sans KR', sans-serif;
+}
+
+h2 {
+    font-family: 'IBM Plex Sans KR', sans-serif;
+}
+
+p {
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+a {
+    font-family: 'IBM Plex Sans KR', sans-serif;
+    color: white;
+    text-decoration: none;
+}
+
+#title_bar {
+    padding: 2em;
+    padding-bottom: 0;
+    margin: 0 auto;
+}
+
+#title_bar > p {
+    float: right;
+    color: white;
+}
+
+#title_bar > img {
+    width: 2em;
+}
+
+#intro_text {
+    padding: 2em;
+    margin: 0 auto;
+    margin-top: 1em;
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+#intro_text > div > p {
+    color: white;
+}
+
+#intro_text > div > div > p {
+    color: white;
+}
+
+
+#intro_text > div > h1 {
+    padding: 0;
+    margin: 0;
+    color: white;
+}
+
+#intro_text > div > div > h1 {
+    padding: 0;
+    margin: 0;
+    color: white;
+}
+
+#intro_text > div > h2 {
+    padding: 0;
+    margin: 0;
+    color: white;
+}
+
+#intro_text > div > div > h2 {
+    padding: 0;
+    margin: 0;
+    color: white;
+}
+
+#intro_text > div > h1 > span {
+    color: #DC948A;
+    font-size: 1.3em;
+}
+
+#intro_text_icon {
+    float: right;
+    font-size: 6em;
+}
+
+#main_text {
+    padding: 2em;
+    padding-bottom: 0;
+    margin: 0 auto;
+    margin-top: 1em;
+}
+
+#main_text > div > h2 {
+    padding: 0;
+    margin: 0;
+}
+
+#main_text > div > h2 > span {
+    color: #DC948A;
+    font-size: 1.3em;
+}
+
+footer > hr {
+    width: 100%;
+    border: 0;
+    height: 1px;
+    background-color: white;
+}
+
+footer {
+    padding: 2em;
+    margin: 0 auto;
+    margin-top: 1em;
+    color: white;
+}
+
+#survey_text {
+    padding: 2em;
+    padding-bottom: 0;
+    margin: 0 auto;
+    margin-top: 1em;
+}
+
+#survey_text > h1 {
+    padding: 0;
+    margin: 0;
+    font-size: 3em;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+#survey_text > h2 {
+    padding: 0;
+    margin: 0;
+}
+
+.survey_select {
+	padding: 15px 10px;
+}
+
+.survey_select input[type=radio] {
+	display: none;
+}
+
+.survey_select input[type=radio] + label {
+	border-radius: 22px;
+	display: inline-block;
+	cursor: pinter;
+	height: 45px;
+	width: 45px;
+	border: 1px solid #6495ED;
+	text-align: center;
+	font-weight: bold;
+	font-size: 30px;
+}
+
+.survey_select input[type=radio] + label {
+	background-color: #fff;
+	color: #6495ED;
+}
+
+.survey_select input[type=radio]:checked + label {
+	border: none;
+	background-color: #32F1FF;
+	color: #fff;
+}
+
+#subject_text > h2 > u {
+    font-family: 'Noto Sans KR', sans-serif;
+    text-decoration: none;
+    background-repeat: no-repeat;
+    background-size: 0% 100%;
+}
+
+#subject_text > h2 > u:hover {
+    background-size: 100% 100%;
+    background-image: linear-gradient(transparent 60%, #F8CD07 40%);
+}
+
+#main_text > hr {
+    width: 100%;
+    border: 0;
+    height: 1px;
+    background-color: gray;
+}
+
+#login {
+    position: relative;
+}
+
+#login * {
+    font-family: 'IBM Plex Sans KR', sans-serif;
+}
+
+#login > input {
+    width: 80%;
+    background-color: white;
+    border: 0;
+    padding: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    outline: none;
+}
+
+#login > input[type="number"]::-webkit-outer-spin-button,
+#login > input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+@media screen and (min-width: 1000px) {
+    #title_bar {
+        width: 30%;
+    }
+
+    #intro_text {
+        width: 30%;
+    }
+
+    #main_text {
+        width: 30%;
+    }
+
+    footer {
+        width: 30%;
+    }
+
+    #survey_text {
+        width: 30%;
+    }
+}
