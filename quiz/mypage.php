@@ -15,14 +15,10 @@ $re = $con->query($sql);
 $info = mysqli_fetch_array($re);
 $last_code = $info['status'];
 
-if ($last_code < ) # 여기서 부터 수정!!!!!!!!!!!!
-$focus = intval($last_code) + 1;
-$per = intval($last_code) / 12 * 100;
-
-$sql = "SELECT * FROM question WHERE id=$focus";
-$re = $con->query($sql);
-$info = mysqli_fetch_array($re);
-$hint = $info['hint'];
+if ($last_code == '0') {
+    echo "<script>location.href='tutorial.php?step=1';</script>";
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -62,23 +58,90 @@ $hint = $info['hint'];
 
     <div id="intro_text">
         <div>
-            <h2><?php echo $_SESSION['name']; ?> 여행자께선</h2>
-            <h2>마지막 장소까지 얼마나 도달했을까요?</h2>
+            <h2>지금까지</h2>
+            <h2>몇 명이 달성했을까요?</h2>
+
+            <p><b>달성 완료</b></p>
             <?php
-            switch ($)
+            $sql = "SELECT * FROM student WHERE status=99";
+            $re = $con->query($sql);
+            $nuum = mysqli_num_rows($re);
+            if (intval($nuum) < 10) {
+                echo "<div style='text-align: right;'>";
+                echo "<h1>" . $nuum . "명</h1>";
+                echo "</div>";
+            } else {
+                echo "<div style='text-align: right;'>";
+                echo "<h1>교환이 마감되었습니다</h1>";
+                echo "</div>";
+            }
+            
             ?>
-            <p><b>달성율</b></p>
-            <div style="text-align: right;">
-                <?php echo "<h1>" . round($per, 1) . "%</h1>" ?>
-            </div>
-            <p><b>풀어야 하는 문제 번호</b></p>
-            <div style="text-align: right;">
-                <?php echo "<h1>" . $focus . "번 문제</h1>" ?>
-            </div>
-            <p><b>다음 장소에 대한 힌트</b></p>
-            <div style="text-align: right;">
-                <?php echo "<h1>" . $hint . "</h1>" ?>
-            </div>
+
+            <p><b>상품 안내</b></p>
+            <p>1~10등까지 상품을 수령할 수 있습니다.<br/>등수별 차등 지급됩니다. 어서어서 서두르세요!</p>
+        </div>
+    </div>
+
+    <div id="intro_text">
+        <div>
+        <?php
+        if ($last_code == '4' ) {
+            echo "<h2>" . $_SESSION['name'] . " 여행자께선</h2>";
+            echo "<h2>마지막 장소까지 얼마나 도달했을까요?</h2>";
+            echo "<p><b>달성율</b></p>";
+            echo "<div style='text-align: right;'>";
+            echo "<h1>달성 완료!</h1>";
+            echo "</div>";
+            echo "<p><b>교환은 어떻게 할 수 있을까요?</b></p>";
+            echo "<div style='text-align: right;'>";
+            echo "<h1>1학년 1반으로 와주세요!</h1>";
+            echo "</div>";
+        } else if ($last_code == '99') {
+            echo "<h2>" . $_SESSION['name'] . " 여행자께선</h2>";
+            echo "<h2>마지막 장소까지 얼마나 도달했을까요?</h2>";
+            echo "<p><b>달성율</b></p>";
+            echo "<div style='text-align: right;'>";
+            echo "<h1>교환 완료!</h1>";
+            echo "</div>";
+        } else {
+            $focus = intval($last_code) + 1;
+            $per = intval($last_code) / 4 * 100;
+
+            $sql = "SELECT * FROM question WHERE id=$focus";
+            $re = $con->query($sql);
+            $info = mysqli_fetch_array($re);
+            $hint = $info['hint']; 
+
+            echo "<h2>" . $_SESSION['name'] . " 여행자께선</h2>";
+            echo "<h2>마지막 장소까지 얼마나 도달했을까요?</h2>";
+            echo "<p><b>달성율</b></p>";
+            echo "<div style='text-align: right;'>";
+                echo "<h1>" . round($per, 1) . "%</h1>";
+            echo "</div>";
+            echo "<p><b>풀어야 하는 문제 번호</b></p>";
+            echo "<div style='text-align: right;'>";
+                echo "<h1>" . $focus . "번 문제</h1>";
+            echo "</div>";
+            echo "<p><b>다음 장소에 대한 힌트</b></p>";
+            echo "<div style='text-align: right;''>";
+            switch ($focus) {
+                case 2:
+                    echo "<h1>🎨</h1>";
+                    break;
+
+                case 3:
+                    echo "<h1>🎵</h1>";
+                    break;
+
+                case 4:
+                    echo "<h1>🪞</h1>";
+                    break;
+            }
+                echo "<h1>" . $hint . "</h1>";
+            echo "</div>";
+        }
+        ?>
         </div>
     </div>
 
@@ -117,6 +180,7 @@ $hint = $info['hint'];
         </div>
     </div>
 
+    <!--
     <div id="intro_text">
         <div>
             <h2>또 다른 김포고를 만든</h2>
@@ -126,6 +190,7 @@ $hint = $info['hint'];
             </div>
         </div>
     </div>
+    -->
 
     <div id="intro_text">
         <div>

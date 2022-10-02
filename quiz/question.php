@@ -14,33 +14,6 @@ if ($_GET['code'] == "") {
     echo "<script>history.back()</script>;";
     exit;
 }
-
-$code = $_GET['code'];
-$sql = "SELECT * FROM question WHERE code=$code";
-$re = $con->query($sql);
-$info = mysqli_fetch_array($re);
-    
-if (mysqli_num_rows($re) == 1) {
-    $quiz_number = $info['id'];
-    $quiz_quesiton = $info['question'];
-} else {
-    echo "<script>alert('존재하지 않는 질문코드입니다. QR코드가 교체되었을 수 있습니다.');</script>";
-    echo "<script>history.back()</script>;";
-    exit;
-}
-
-$id = $_SESSION['id'];
-$sql = "SELECT * FROM student WHERE id=$id";
-$re = $con->query($sql);
-$info = mysqli_fetch_array($re);
-$last_code = $info['status'];
-$focus = intval($last_code) + 1;
-
-if (intval($quiz_number) != $focus) {
-    echo "<script>alert('아직 풀이할 차례의 문제가 아니거나,\\n이미 풀이한 문제입니다.\\n\\n현재 풀어야 할 문제는 " . $focus . "번입니다.');</script>";
-    echo "<script>history.back()</script>;";
-    exit;
-}
 ?>
 
 <!DOCTYPE html>
@@ -83,19 +56,151 @@ if (intval($quiz_number) != $focus) {
         </div>
     </div>
 
-    <div id="intro_text">
-        <div>
-            <h2>Q. <?php echo $quiz_quesiton ?></h2>
-            <br/>
-            <form id="login" action="aprocess.php" method="POST" style="text-align: center;">
-                <?php echo "<input name='code' type='hidden' value='" . $quiz_number . "' />"; ?>
-                <input name="answer" type="text" placeholder="정답" />
-            </form>
-            <div style="text-align: right;">
-                <a href="#" onclick="return chk_form()" class="arrow-btn">정답 확인</a>
-            </div>
-        </div>
-    </div>
+    <?php
+    $id = $_SESSION['id'];
+    $sql = "SELECT * FROM student WHERE id=$id";
+    $re = $con->query($sql);
+    $info = mysqli_fetch_array($re);
+    $last_code = $info['status'];
+    $focus = intval($last_code) + 1;
+    
+    $code = $_GET['code'];
+    switch ($code) {
+        case '123':
+            if ($focus != '1') {
+                echo "<script>alert('아직 풀이할 차례의 문제가 아니거나,\\n이미 풀이한 문제입니다.\\n\\n현재 풀어야 할 문제는 " . $focus . "번입니다.');</script>";
+                echo "<script>history.back()</script>;";
+                exit;
+            }
+
+            $quiz_number = 1;
+            $sql = "SELECT * FROM question WHERE id=$quiz_number";
+            $re = $con->query($sql);
+            $info = mysqli_fetch_array($re);
+
+            echo "<div id='intro_text'>";
+                echo "<div>";
+                    echo "<h2>Q. " . $info['question'] . "</h2>";
+                    echo "<br/>";
+                    echo '<form id="login" action="aprocess.php" method="POST" style="text-align: center;">';
+                    echo "<input name='bridge' type='hidden' value='1' />";
+                    echo "<input name='pccode' type='hidden' value='1' />";
+                    echo "<input name='code' type='hidden' value='" . $quiz_number . "' />";
+                    echo '<input name="answer" type="text" placeholder="정답" />';
+                    echo '</form>';
+                    echo '<div style="text-align: right;">';
+                    echo '<a href="#" onclick="return chk_form()" class="arrow-btn">정답 확인</a>';
+                    echo '</div>';
+                echo '</div>';
+            echo '</div>';
+
+            break;
+
+        case '135':
+            if ($focus != '2') {
+                echo "<script>alert('아직 풀이할 차례의 문제가 아니거나,\\n이미 풀이한 문제입니다.\\n\\n현재 풀어야 할 문제는 " . $focus . "번입니다.');</script>";
+                echo "<script>history.back()</script>;";
+                exit;
+            }
+            
+            $temp = array('2', '3', '4', '5', '6');
+            $quiz_number = array_rand($temp, 2);
+
+            echo "<div id='intro_text'>";
+            echo "<div>";
+            echo '<form id="login" action="aprocess.php" method="POST" style="text-align: center;">';
+            echo "<input name='bridge' type='hidden' value='2' />";
+            echo "<input name='pccode' type='hidden' value='2' />";
+
+            for ($i = 0; $i <= 1; $i++) {
+                $qn = $temp[$quiz_number[$i]];
+                $sql = "SELECT * FROM question WHERE id=$qn";
+                $re = $con->query($sql);
+                $info = mysqli_fetch_array($re);
+                    echo "<h2 id='qqq'>Q. " . $info['question'] . "</h2>";
+                    echo "<br/>";
+                    echo "<input name='code" . $i ."' type='hidden' value='" . $qn . "' />";
+                    echo '<input name="answer' . $i . '" type="text" placeholder="정답" />';
+                    echo '<br/>';
+            }
+
+            echo '</form>';
+            echo '<div style="text-align: right;">';
+            echo '<a href="#" onclick="return chk_form()" class="arrow-btn">정답 확인</a>';
+            echo '</div>';
+            echo '</div>';
+            echo '</div>';
+            
+            break;
+
+        case '105':
+            if ($focus != '3') {
+                echo "<script>alert('아직 풀이할 차례의 문제가 아니거나,\\n이미 풀이한 문제입니다.\\n\\n현재 풀어야 할 문제는 " . $focus . "번입니다.');</script>";
+                echo "<script>history.back()</script>;";
+                exit;
+            }
+
+            $quiz_number = 7;
+            $sql = "SELECT * FROM question WHERE id=$quiz_number";
+            $re = $con->query($sql);
+            $info = mysqli_fetch_array($re);
+
+            echo "<div id='intro_text'>";
+                echo "<div>";
+                    echo "<h2>Q. " . $info['question'] . "</h2>";
+                    echo "<br/>";
+                    echo '<form id="login" action="aprocess.php" method="POST" style="text-align: center;">';
+                    echo "<input name='bridge' type='hidden' value='1' />";
+                    echo "<input name='pccode' type='hidden' value='3' />";
+                    echo "<input name='code' type='hidden' value='" . $quiz_number . "' />";
+                    echo '<input name="answer" type="text" placeholder="정답" />';
+                    echo '</form>';
+                    echo '<div style="text-align: right;">';
+                    echo '<a href="#" onclick="return chk_form()" class="arrow-btn">정답 확인</a>';
+                    echo '</div>';
+                echo '</div>';
+            echo '</div>';
+
+            break;
+
+        case '145':
+            if ($focus != '4') {
+                echo "<script>alert('아직 풀이할 차례의 문제가 아니거나,\\n이미 풀이한 문제입니다.\\n\\n현재 풀어야 할 문제는 " . $focus . "번입니다.');</script>";
+                echo "<script>history.back()</script>;";
+                exit;
+            }
+            
+            $temp = array('8', '9', '10', '11', '12');
+            $quiz_number = array_rand($temp, 2);
+
+            echo "<div id='intro_text'>";
+            echo "<div>";
+            echo '<form id="login" action="aprocess.php" method="POST" style="text-align: center;">';
+            echo "<input name='bridge' type='hidden' value='2' />";
+            echo "<input name='pccode' type='hidden' value='4' />";
+
+            for ($i = 0; $i <= 1; $i++) {
+                $qn = $temp[$quiz_number[$i]];
+                $sql = "SELECT * FROM question WHERE id=$qn";
+                $re = $con->query($sql);
+                $info = mysqli_fetch_array($re);
+                    echo "<h2 id='qqq'>Q. " . $info['question'] . "</h2>";
+                    echo "<br/>";
+                    echo "<input name='code" . $i ."' type='hidden' value='" . $qn . "' />";
+                    echo '<input name="answer' . $i . '" type="text" placeholder="정답" />';
+                    echo '<br/>';
+            }
+
+            echo '</form>';
+            echo '<div style="text-align: right;">';
+            echo '<a href="#" onclick="return chk_form()" class="arrow-btn">정답 확인</a>';
+            echo '</div>';
+            echo '</div>';
+            echo '</div>';
+            
+            break;
+    }
+    ?>
 
     <footer>
         <hr />
