@@ -56,6 +56,20 @@ if ($last_code == '0') {
         </div>
     </div>
 
+    <?php
+        if ($last_code == '4' or $last_code == '99') {
+            echo '<div id="intro_text">';
+            echo '<div>';
+                echo '<h2>메타버스를 체험한 당신</h2>';
+                echo '<h2>김포고의 대표가 되어주실 수 있나요..?</h2>';
+                echo '<div style="text-align: right;">';
+                    echo '<a href="https://forms.gle/nnyFCsWNexZck4HVA" class="arrow-btn">설문조사 참여</a>';
+                echo '</div>';
+            echo '</div>';
+            echo '</div>';
+        }
+    ?>
+
     <div id="intro_text">
         <div>
             <h2>지금까지</h2>
@@ -80,6 +94,9 @@ if ($last_code == '0') {
 
             <p><b>상품 안내</b></p>
             <p>1~10등까지 상품을 수령할 수 있습니다.<br/>등수별 차등 지급됩니다. 어서어서 서두르세요!</p>
+
+            <p><b>수령 시 주의사항</b></p>
+            <p>수업이나 조, 종례 시엔 상품 수령을 비롯한<br/>일체의 문의를 받지 않습니다.<br/>쉬는 시간과 점심시간을 이용해주세요.</p>
         </div>
     </div>
 
